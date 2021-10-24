@@ -1,0 +1,23 @@
+.login-form {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-form {
+    border: none;
+    height: 40px;
+    background-color: #E7EEFE;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 13px;
+    padding: 0 15px;
+    color: $body-bg-color;
+    &::placeholder {
+        color: $body-bg-color;
+    }
+}

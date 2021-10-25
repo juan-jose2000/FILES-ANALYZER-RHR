@@ -1,0 +1,83 @@
+.color-primary {
+  color: #414042; }
+
+.bg-color-primary {
+  background-color: #414042; }
+
+.color-secondary {
+  color: #607d8b; }
+
+.bg-color-secondary {
+  background-color: #607d8b; }
+
+.color-inverse {
+  color: #FFF; }
+
+.bg-color-inverse {
+  background-color: #FFF; }
+
+.color-success {
+  color: #4caf50; }
+
+.bg-color-success {
+  background-color: #4caf50; }
+
+.color-info {
+  color: #03a9f4; }
+
+.bg-color-info {
+  background-color: #03a9f4; }
+
+.color-warning {
+  color: #ff9800; }
+
+.bg-color-warning {
+  background-color: #ff9800; }
+
+.color-danger {
+  color: #f44336; }
+
+.bg-color-danger {
+  background-color: #f44336; }
+
+.gray-base {
+  color: #2b2828; }
+
+.bg-gray-base {
+  background-color: #2b2828; }
+
+.gray-darker {
+  color: #534d4d; }
+
+.bg-gray-darker {
+  background-color: #534d4d; }
+
+.gray-dark {
+  color: #877e7e; }
+
+.bg-gray-dark {
+  background-color: #877e7e; }
+
+.gray-regular {
+  color: #aca6a6; }
+
+.bg-gray-regular {
+  background-color: #aca6a6; }
+
+.gray-light {
+  color: #d1cece; }
+
+.bg-gray-light {
+  background-color: #d1cece; }
+
+.gray-lighter {
+  color: white; }
+
+.bg-gray-lighter {
+  background-color: white; }
+
+.gray-ghost {
+  color: white; }
+
+.bg-gray-ghost {
+  background-color: white; }

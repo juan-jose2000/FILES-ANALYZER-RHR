@@ -1,12 +1,14 @@
 import React from 'react'
 import logo from '../img/img-login.png';
-// import './login.css';
 
 export const Login = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
         console.log("hola");
+
+        console.log("hola2");
+
     }
 
     return (

@@ -331,6 +331,12 @@ body .modal-video-content i {
 .none {
   display: none; }
 
+.error {
+  color: white;
+  padding: 10px 20px;
+  background-color: #D70000;
+  border-radius: 10px; }
+
 .button {
   padding: 10px 40px;
   border-bottom-left-radius: 20px 50%;
@@ -386,3 +392,93 @@ body .modal-video-content i {
       margin-top: 2rem;
       margin-bottom: 1.3rem;
       letter-spacing: normal; }
+
+.main-section-wrapper .recover-password {
+  justify-content: center;
+  align-items: center; }
+  .main-section-wrapper .recover-password .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .main-section-wrapper .recover-password .content .img-login {
+      width: 100%;
+      max-width: 120px; }
+    .main-section-wrapper .recover-password .content .titulo {
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 1.3rem;
+      letter-spacing: normal; }
+
+.main-section-wrapper .create-user {
+  max-width: 70%;
+  margin-top: 15rem;
+  max-width: 1223px;
+  display: flex;
+  justify-content: center; }
+  .main-section-wrapper .create-user .content {
+    width: 100%;
+    position: relative;
+    top: 0;
+    text-align: center;
+    max-width: 800px; }
+    .main-section-wrapper .create-user .content .img-create-user {
+      width: 100%;
+      max-width: 450px;
+      margin-top: -250px; }
+    .main-section-wrapper .create-user .content h1 {
+      margin-top: 2.5rem;
+      font-size: 3rem;
+      letter-spacing: normal; }
+    .main-section-wrapper .create-user .content p {
+      color: #2B67F2;
+      font-size: 1.2rem;
+      letter-spacing: 0ch;
+      margin: 2rem 0 0 0; }
+    .main-section-wrapper .create-user .content .subtexto {
+      font-size: 1.2rem;
+      margin: 0; }
+    .main-section-wrapper .create-user .content .line-blue {
+      width: 98%;
+      height: 3px;
+      background-color: #2B67F2;
+      margin: 0 auto; }
+    .main-section-wrapper .create-user .content .create-user-form {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100% !important;
+      max-width: 1223px;
+      margin: 2.5rem auto; }
+      .main-section-wrapper .create-user .content .create-user-form .container-input {
+        width: calc(50% - 10px);
+        margin: 2px 2px 0 2px; }
+        .main-section-wrapper .create-user .content .create-user-form .container-input .input-form {
+          width: 100% !important;
+          max-width: 395px;
+          margin-bottom: 10px; }
+      .main-section-wrapper .create-user .content .create-user-form .div-button {
+        width: 100%;
+        text-align: end; }
+
+@media screen and (max-width: 992px) {
+  .main-section-wrapper .create-user {
+    width: 95%;
+    max-width: 100%;
+    padding: 10px; }
+    .main-section-wrapper .create-user .content {
+      width: 100%;
+      max-width: 100%;
+      text-align: center; }
+      .main-section-wrapper .create-user .content .img-create-user {
+        margin-top: -150px; }
+      .main-section-wrapper .create-user .content h1 {
+        font-size: 2rem; }
+      .main-section-wrapper .create-user .content .line-blue {
+        width: 90%;
+        height: 3px;
+        background-color: #2B67F2; }
+      .main-section-wrapper .create-user .content .create-user-form .container-input {
+        width: 100%; }
+      .main-section-wrapper .create-user .content .create-user-form .div-button {
+        text-align: center; } }

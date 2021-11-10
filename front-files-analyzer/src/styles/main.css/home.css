@@ -1,0 +1,12 @@
+.main-section-wrapper .home .content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .main-section-wrapper .home .content .header-home {
+    width: 100%;
+    display: flex; }
+    .main-section-wrapper .home .content .header-home div {
+      width: 33%;
+      text-align: center; }

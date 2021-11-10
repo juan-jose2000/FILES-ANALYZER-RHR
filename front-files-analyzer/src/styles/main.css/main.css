@@ -103,8 +103,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  letter-spacing: 1px;
-  line-height: 1.5;
   margin: 0; }
   body * {
     box-sizing: border-box; }
@@ -372,6 +370,30 @@ body .modal-video-content i {
   .input-form::placeholder {
     color: #2B67F2; }
 
+.bg-navbar {
+  background-color: #2B67F2; }
+  .bg-navbar .container-fluid .collapse .navbar-nav .nav-link {
+    color: #E7EEFE !important; }
+  .bg-navbar .container-fluid .collapse form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem; }
+
+.nav-link {
+  color: #E7EEFE !important; }
+
+.without-padding-top {
+  padding-top: 0px !important; }
+
+@media screen and (max-width: 990px) {
+  .bg-navbar .container-fluid .collapse .navbar-nav .nav-link {
+    font-size: 20px !important;
+    padding: 10px 15px !important;
+    border-bottom: 1px solid white !important; }
+  .bg-navbar .container-fluid .collapse form {
+    margin-right: 0; } }
+
 .main-section-wrapper .login {
   display: flex;
   flex-direction: column;
@@ -395,7 +417,13 @@ body .modal-video-content i {
 
 .main-section-wrapper .recover-password {
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  position: relative; }
+  .main-section-wrapper .recover-password .img-atras {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    max-width: 44px; }
   .main-section-wrapper .recover-password .content {
     display: flex;
     flex-direction: column;
@@ -482,3 +510,31 @@ body .modal-video-content i {
         width: 100%; }
       .main-section-wrapper .create-user .content .create-user-form .div-button {
         text-align: center; } }
+
+.main-section-wrapper .home .content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .main-section-wrapper .home .content .header-home {
+    width: 100%;
+    max-width: 1232px;
+    display: flex; }
+    .main-section-wrapper .home .content .header-home div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 33.3%;
+      text-align: center; }
+      .main-section-wrapper .home .content .header-home div p {
+        margin: 0;
+        margin-left: 7px;
+        color: #2B67F2;
+        font-weight: bold; }
+      .main-section-wrapper .home .content .header-home div .icon-plus {
+        background-color: #E7EEFE;
+        color: white;
+        padding: 8px 11px;
+        border-radius: 25px; }
+        .main-section-wrapper .home .content .header-home div .icon-plus .icon {
+          color: #1E449D; }

@@ -1,0 +1,46 @@
+.bg-navbar {
+    background-color: $blue-files-analayzer;
+    .container-fluid {
+        .collapse {
+            .navbar-nav {
+                .nav-link {
+                    color: #E7EEFE!important;
+                }
+            }
+            form {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 2rem;
+            }
+        }
+    }
+}
+
+.nav-link {
+    color: #E7EEFE!important;
+}
+
+.without-padding-top {
+    padding-top: 0px!important;
+}
+
+@media screen and (max-width:990px) {
+    .bg-navbar {
+        .container-fluid { 
+            .collapse{
+                .navbar-nav{
+                    .nav-link {
+                        font-size: 20px!important;
+                        padding: 10px 15px!important;
+                        border-bottom: 1px solid white!important;
+                    }
+                }
+                form {
+                    margin-right: 0;
+                }
+            }               
+        }
+    }
+}
+

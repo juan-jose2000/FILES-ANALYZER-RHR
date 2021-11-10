@@ -9,6 +9,7 @@ import { HomeScreen } from "../home/HomeScreen";
 import { Login } from "../login/Login";
 import { RecoverPassword } from "../login/recover-password/recover-password";
 import { NavBar } from "../navbar/NavBar";
+import { UserList } from "../user-list/UserList";
 
 export const AppRouter = () => {
 
@@ -36,6 +37,7 @@ export const AppRouter = () => {
                 <RecoverPassword setCurrentPath={setCurrentPath} />
               </Route>
               <Route exact path="/create-user" component={ CreateUser } />
+              <Route exact path="/user-list" component={ UserList } />
 
             </Switch>
           </div>

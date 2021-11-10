@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { useForm } from "../../hooks/useForm/useForm";
 import logo from '../../img/img-login.png';
-import { useLocation } from 'react-router-dom'
+import imgAtras from '../../img/img-atras.png';
+import { NavLink, useLocation } from 'react-router-dom'
 import _ from "lodash";
 
 export const RecoverPassword = (props) => {
@@ -43,6 +44,11 @@ export const RecoverPassword = (props) => {
     return (
         <section className="main-section-wrapper">
             <div className="content-wrapper recover-password">
+
+                <NavLink className="nav-item nav-link" to="/login">
+                    <img src={imgAtras} className="img-atras" />
+                </NavLink>
+
                 <div className="content">
                     <img src={logo} className="img-login" />
                     <h1 className="titulo text-uppercase">Reestablezca su <br/><b>Contraseña</b> </h1>

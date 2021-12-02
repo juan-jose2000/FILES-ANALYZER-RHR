@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import {
     FILE_MODULE_GET_ONE_FILE_BEGIN,
-    FILE_MODULE_GET_ONE_FILE_SUCCESS, 
+    FILE_MODULE_GET_ONE_FILE_SUCCESS,
     FILE_MODULE_GET_ONE_FILE_FAILURE,
     FILE_MODULE_GET_ONE_ANALYZE_FILE_BEGIN,
     FILE_MODULE_GET_ONE_ANALYZE_FILE_SUCCESS,
@@ -21,7 +21,10 @@ import {
     FILE_MODULE_DELETE_FILE_BEGIN,
     FILE_MODULE_DELETE_FILE_SUCCESS,
     FILE_MODULE_DELETE_FILE_FAILURE,
- } from '../actionTypes';
+} from '../actionTypes';
+
+
+const apiUrl = 'http://[::1]:3000/files';
 
 export const getOneFileBegin = () => ({
     type: FILE_MODULE_GET_ONE_FILE_BEGIN,
@@ -55,9 +58,10 @@ export const getAllFilesBegin = () => ({
     type: FILE_MODULE_GET_ALL_FILES_BEGIN,
 });
 
-export const getAllFilesSuccess = (file) => ({
+export const getAllFilesSuccess = ({file, count}) => ({
     type: FILE_MODULE_GET_ALL_FILES_SUCCESS,
     file,
+    count
 });
 
 export const getAllFilesFailure = (error) => ({
@@ -109,18 +113,18 @@ export const getOneFile = (id) => {
     return async (dispatch, getState) => {
         await axios({
             method: 'get',
-            url: `http://[::1]:3000/files/${id}`,
+            url: `${apiUrl}/${id}`,
             headers: getState().auth.request.headers,
             params: {
                 filter: { include: ["user"] }
             }
         })
-        .then(response => {
-            dispatch( getOneFileSuccess(response.data))
-          })
-        .catch((error) => {
-            dispatch( getOneFileFailure(error))
-        })    
+            .then(response => {
+                dispatch(getOneFileSuccess(response.data))
+            })
+            .catch((error) => {
+                dispatch(getOneFileFailure(error))
+            })
     }
 }
 
@@ -129,35 +133,41 @@ export const getOneFileAnalyze = (id) => {
     return async (dispatch, getState) => {
         await axios({
             method: 'get',
-            url: `http://[::1]:3000/files/${id}/analyze`,
+            url: `${apiUrl}/${id}/analyze`,
             headers: getState().auth.request.headers,
         })
-        .then(response => {
-            dispatch( getOneFileAnalyzeSuccess(response.data))
-          })
-        .catch((error) => {
-            dispatch( getOneFileAnalyzeFailure(error))
-        })    
+            .then(response => {
+                dispatch(getOneFileAnalyzeSuccess(response.data))
+            })
+            .catch((error) => {
+                dispatch(getOneFileAnalyzeFailure(error))
+            })
     }
 }
 
 
-export const getAllFiles = () => {
+export const getAllFiles = (filter = {}) => {
     return async (dispatch, getState) => {
-        await axios({
-            method: 'get',
-            url: `http://[::1]:3000/files`,
-            headers: getState().auth.request.headers,
-            params: {
-                filter: { include: ["user"] }
-            }
-        })
-        .then(response => {
-            dispatch( getAllFilesSuccess(response.data))
-          })
-        .catch((error) => {
-            dispatch( getAllFilesFailure(error))
-        })    
+        try {
+            const { data: file } = await axios({
+                method: 'get',
+                url: `${apiUrl}`,
+                headers: getState().auth.request.headers,
+                params: {
+                    filter: { include: ["user"], ...filter }
+                }
+            });
+
+            const { data: count } = await axios({
+                method: 'get',
+                url: `${apiUrl}/count`,
+                headers: getState().auth.request.headers
+            });
+
+            dispatch(getAllFilesSuccess({file, count: count.count}))
+        } catch (e) {
+            dispatch(getAllFilesFailure(e))
+        }
     }
 }
 
@@ -165,33 +175,33 @@ export const createFile = (data) => {
     return async (dispatch, getState) => {
         return axios({
             method: 'post',
-            url: `http://[::1]:3000/files`,
+            url: `${apiUrl}`,
             headers: getState().auth.request.headers,
             data
         })
-        .then(response => {
-            dispatch( upsertFileSuccess(response.data));
-            toast.success('Se subio correctamente', {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-            return true;
-          })
-        .catch((error) => {
-            dispatch( upsertFileFailure(error))
-        })    
+            .then(response => {
+                dispatch(upsertFileSuccess(response.data));
+                toast.success('Se subio correctamente', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return true;
+            })
+            .catch((error) => {
+                dispatch(upsertFileFailure(error))
+            })
     }
 }
 
 export function deleteFile(id) {
     return (dispatch, getState) => {
-        dispatch( deleteFileBegin() );
+        dispatch(deleteFileBegin());
         return axios({
             method: 'patch',
             url: `http://[::1]:3000/files/${id}`,
@@ -200,23 +210,23 @@ export function deleteFile(id) {
                 _id: id,
                 deleted: true
             }
-        }) 
-        .then(response => {
-            dispatch( deleteFileSuccess(id));
-            toast.success('Se elimino correctamente', {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-            return true;
-          })
-        .catch((error) => {
-            dispatch(deleteFileFailure(error))
-        })    
+        })
+            .then(response => {
+                dispatch(deleteFileSuccess(id));
+                toast.success('Se elimino correctamente', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                return true;
+            })
+            .catch((error) => {
+                dispatch(deleteFileFailure(error))
+            })
     }
 }

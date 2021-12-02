@@ -9,6 +9,10 @@ body {
     box-sizing: border-box;
 }
 
+.color-blue {
+    color: #2B67F2 !important;
+}
+
 .btn-link {
     font-size: 17px!important;
 }
@@ -92,6 +96,7 @@ body {
     a:link {
         color: #000;
     }
+    
     a:visited {}
     p {
         color: black;

@@ -50,7 +50,8 @@ import {
             return {
                 ...state,
                 files: {
-                    data: action.file
+                    data: action.file,
+                    count: action.count
                 }
             };
         case FILE_MODULE_GET_ALL_FILES_FAILURE:

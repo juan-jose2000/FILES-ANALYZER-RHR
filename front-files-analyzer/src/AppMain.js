@@ -1,11 +1,13 @@
 import React from "react"
-import { LoginContext } from "./LoginContext";
-import { AppRouter } from "./app-router/AppRouter";
+import { Provider } from 'react-redux';
+import { App } from "./App";
+import { store } from "./redux/store/store";
 
 export const AppMain = () => {
+
     return (
-        <LoginContext.Provider>
-            <AppRouter/>
-        </LoginContext.Provider>
+       <Provider store={store}>
+           <App />
+       </Provider>
     );
 }

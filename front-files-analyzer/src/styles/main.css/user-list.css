@@ -1,0 +1,24 @@
+.user-list .content-wrapper .content {
+  width: 100%;
+  max-width: 1223px;
+  margin: 0 auto; }
+  .user-list .content-wrapper .content .titulo {
+    padding: 25px 0;
+    font-size: 2.5rem;
+    letter-spacing: normal; }
+  .user-list .content-wrapper .content .table-responsive {
+    width: 100%;
+    max-width: 100%; }
+  .user-list .content-wrapper .content .table thead tr th {
+    text-align: center;
+    background-color: #E7EEFE;
+    padding: 12px 0; }
+  .user-list .content-wrapper .content .table tbody tr td {
+    text-align: center;
+    padding: 12px 0; }
+
+.icon-dropdown {
+  width: 10px;
+  font-size: 25px;
+  width: 30px !important;
+  cursor: pointer; }

@@ -1,0 +1,25 @@
+.file-detail .content-wrapper {
+  justify-content: center; }
+  .file-detail .content-wrapper .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 1223px;
+    align-items: center; }
+    .file-detail .content-wrapper .content .container-icon-mode {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      width: 100%;
+      padding: 20px 0; }
+      .file-detail .content-wrapper .content .container-icon-mode .icon-vista {
+        max-width: 50px; }
+
+.box-shadow {
+  box-shadow: 0 30px 40px 0 rgba(16, 36, 94, 0.2); }
+
+.document {
+  box-shadow: 0 30px 40px 0 rgba(16, 36, 94, 0.2); }
+
+.react-pdf__Page__textContent {
+  display: none; }

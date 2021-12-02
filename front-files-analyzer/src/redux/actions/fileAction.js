@@ -171,7 +171,7 @@ export const getAllFiles = (filter = {}) => {
     }
 }
 
-export const createFile = (data) => {
+export const createFile = ({data, pagination}) => {
     return async (dispatch, getState) => {
         return axios({
             method: 'post',
@@ -181,6 +181,7 @@ export const createFile = (data) => {
         })
             .then(response => {
                 dispatch(upsertFileSuccess(response.data));
+                dispatch(getAllFiles({ limit: pagination }));
                 toast.success('Se subio correctamente', {
                     position: "bottom-right",
                     autoClose: 5000,

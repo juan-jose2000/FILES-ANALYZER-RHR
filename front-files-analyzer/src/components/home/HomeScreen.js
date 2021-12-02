@@ -64,7 +64,7 @@ export const HomeScreen = () => {
 
     const uploadFile = async () => {
         if (!_.isEmpty(nombreArchivo)) {
-            const resultado = await dispatch(createFile(formData));
+            const resultado = await dispatch(createFile({data: formData, pagination}));
             if (resultado === true) {
                 setArchivo({
                     nombreArchivo: "",
@@ -107,7 +107,6 @@ export const HomeScreen = () => {
         const dateCreatedAt = moment(element.created_at).local().format('DD-MM-YYYY HH:mm:ss');
         return (
             <tr>
-                <td></td>
                 <td>{
                     (element.mimetype === "application/pdf") ?
                         iconPdf : (element.mimetype === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") ? iconWord :
@@ -140,26 +139,22 @@ export const HomeScreen = () => {
         <table className="table table-hover align-middle table-borderless">
             <thead className="">
                 <tr>
-                    <th>
-                        <div class="form-check form-switch" data-bs-toggle="tooltip" data-bs-placement="left" title="ver registros eliminados">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                        </div>
-                    </th>
+                    
                     <th>
                         Nombre
-                        <FontAwesomeIcon icon={faExchangeAlt} className={"icon-exchange"} />
+                        {/* <FontAwesomeIcon icon={faExchangeAlt} className={"icon-exchange"} /> */}
                     </th>
                     <th>
                         Propietario
-                        <FontAwesomeIcon icon={faExchangeAlt} className={"icon-exchange"} />
+                        {/* <FontAwesomeIcon icon={faExchangeAlt} className={"icon-exchange"} /> */}
                     </th>
                     <th>
                         Fecha de creación
-                        <FontAwesomeIcon icon={faExchangeAlt} className={"icon-exchange"} />
+                        {/* <FontAwesomeIcon icon={faExchangeAlt} className={"icon-exchange"} /> */}
                     </th>
                     <th>
                         Nivel de acceso
-                        <FontAwesomeIcon icon={faExchangeAlt} className={"icon-exchange"} />
+                        {/* <FontAwesomeIcon icon={faExchangeAlt} className={"icon-exchange"} /> */}
                     </th>
                     <th className="text-center">Acciones</th>
                 </tr>

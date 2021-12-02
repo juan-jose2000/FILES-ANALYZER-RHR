@@ -262,6 +262,14 @@ body .modal-video-content i {
     min-height: calc(97vh);
     display: flex; }
 
+.pagination {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%; }
+  .pagination p {
+    width: 300px; }
+
 .titulo {
   color: #2B67F2;
   font-size: 1.9rem; }
@@ -620,13 +628,6 @@ body .modal-video-content i {
               min-width: 105px; }
               .main-section-wrapper .home .content .list-files .body-square .archivo .botones div button {
                 width: 90%; }
-    .main-section-wrapper .home .content .pagination {
-      display: flex;
-      justify-content: start;
-      align-items: center;
-      width: 100%; }
-      .main-section-wrapper .home .content .pagination p {
-        width: 300px; }
 
 .icon-exchange {
   transform: rotate(90deg);

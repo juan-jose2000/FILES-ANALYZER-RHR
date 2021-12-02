@@ -40,7 +40,8 @@ import {
                 ...state,
                 persons: {
                     totalRecords: action.user.length,
-                    data: action.user
+                    data: action.user,
+                    count: action.count
                 },
             };
         case USERLIST_MODULE_GET_ALL_USERLISTS_FAILURE:

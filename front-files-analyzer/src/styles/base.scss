@@ -237,6 +237,16 @@ body .modal-video-content i {
     }
 }
 
+.pagination {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    p {
+        width: 300px;
+    }
+}
+
 .titulo {
     color: $body-bg-color;
     font-size: 1.9rem;

@@ -7,6 +7,7 @@ import { createFile, deleteFile, getAllFiles } from "../../redux/actions/fileAct
 import _ from 'lodash';
 import moment from 'moment';
 import jwt_decode from "jwt-decode";
+import { Pagination } from "../pagination/Pagination";
 
 export const HomeScreen = () => {
 
@@ -35,7 +36,7 @@ export const HomeScreen = () => {
 
     useEffect(() => {
         dispatch(getAllFiles({ limit: pagination }));
-    }, []);
+    }, [pagination]);
 
     const { list } = acomodo;
     const { nombreArchivo, formData } = archivo;
@@ -45,16 +46,6 @@ export const HomeScreen = () => {
         setAcomodo({
             list: !list
         })
-    }
-
-    const CreatePaginationOptions = () => {
-        const options = [];
-        const maxIndex = Math.ceil(pagination / 10);
-        for (let i = 1; i <= maxIndex; i++) {
-            const isSelected = pagination === i * 10;
-            options.push(<option selected={isSelected} value={i * 10}>{i * 10}</option>)
-        }
-        return options;
     }
 
     const handlePagination = (a) => {
@@ -275,15 +266,7 @@ export const HomeScreen = () => {
                             (list === true) ? vistaLista : vistaCuadro
                         }
                     </div>
-                    <div className="pagination">
-                        <p>Total de elementos: {file.files.count}</p>
-                        <select
-                            className="input-form"
-                            onChange={handlePagination}
-                        >
-                            <CreatePaginationOptions/>
-                        </select>
-                    </div>
+                    <Pagination pagination={pagination} count={file.files.count} handleChange={handlePagination} />
                 </div>
             </div>
         </section>

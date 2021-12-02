@@ -103,13 +103,6 @@
               min-width: 105px; }
               .main-section-wrapper .home .content .list-files .body-square .archivo .botones div button {
                 width: 90%; }
-    .main-section-wrapper .home .content .pagination {
-      display: flex;
-      justify-content: start;
-      align-items: center;
-      width: 100%; }
-      .main-section-wrapper .home .content .pagination p {
-        width: 300px; }
 
 .icon-exchange {
   transform: rotate(90deg);

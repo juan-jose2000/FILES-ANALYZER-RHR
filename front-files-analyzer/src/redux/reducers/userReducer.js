@@ -21,11 +21,12 @@ export default function userReducer(state = initialState.user, action) {
         case USER_MODULE_USER_LOGIN_SUCCESS: {
           return {
             ...state,
+            user: action.user,
             request: {
               ...state.request,
               headers:{
                 ...state.request.headers,
-                Authorization: `Bearer ${action.user.token}`,
+                Authorization: `Bearer ${action.token}`,
               },
             },
             loading: false,

@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 // import { userLogin } from '../../redux/actions/userAction';
 import { userLoginBegin, userLoginSuccess } from '../../redux/actions/userAction';
+import jwt_decode from 'jwt-decode';
 
 export const Login = (props) => {
 
@@ -61,9 +62,13 @@ export const Login = (props) => {
                 }
             })  
             
-            dispatch(userLoginSuccess(data));
-
             console.log(data.token);
+            const decoded = jwt_decode(data.token);
+            console.log(decoded);
+
+            dispatch(userLoginSuccess({token: data.token, user: decoded}))
+
+
 
             props.history.push(`/home`);
 

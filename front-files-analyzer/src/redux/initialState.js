@@ -25,6 +25,7 @@ export default {
       loadingGetAllActivities: false,
       errorGetAllActivities: null,
       totalRecords: 11,
+      bandera: false,
       data: [
         { _id: 1, name: 'juan 3', last_father_name: "hernandez", last_mother_name: "palma", email: 'mail@mail.com', password: 'test123', user_type:"3",  },
         { _id: 2, name: 'juan 3', last_father_name: "hernandez", last_mother_name: "palma", email: 'mail@mail.com', password: 'test123', user_type:"3", },

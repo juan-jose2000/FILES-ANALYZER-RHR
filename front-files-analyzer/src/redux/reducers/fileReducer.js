@@ -11,6 +11,9 @@ import {
     FILE_MODULE_UPSERT_FILE_BEGIN,
     FILE_MODULE_UPSERT_FILE_SUCCESS,
     FILE_MODULE_UPSERT_FILE_FAILURE,
+    FILE_MODULE_DELETE_FILE_BEGIN,
+    FILE_MODULE_DELETE_FILE_SUCCESS,
+    FILE_MODULE_DELETE_FILE_FAILURE,
  } from '../actionTypes';
  
  import initialState from '../initialState';
@@ -57,6 +60,17 @@ import {
         case FILE_MODULE_UPSERT_FILE_SUCCESS:
             return state;
         case FILE_MODULE_UPSERT_FILE_FAILURE:
+            return state;
+        case FILE_MODULE_DELETE_FILE_BEGIN:
+            return state;
+        case FILE_MODULE_DELETE_FILE_SUCCESS:
+            return {
+                ...state,
+                files: {
+                    data: state.files.data.filter( file => file._id !== action.id  )
+                }
+            };
+        case FILE_MODULE_DELETE_FILE_FAILURE:
             return state;
          default:
              return state;

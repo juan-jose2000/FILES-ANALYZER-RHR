@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { userLogout } from "../../redux/actions/userAction";
 
@@ -10,6 +10,8 @@ export const NavBar = () =>{
     const logout = () => {
         dispatch(userLogout());
     }
+
+    const user = useSelector( state => state.auth.user );
 
     return (
 
@@ -30,12 +32,9 @@ export const NavBar = () =>{
                    
                 </div>
                 <div className="navbar-nav ms-auto">
-                    {/* <form >
-                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                    </form> */}
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Juan Jose
+                            { user.name }
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><NavLink className="dropdown-item" to="/change-password">Cambiar contraseña</NavLink></li>

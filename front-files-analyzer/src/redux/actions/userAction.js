@@ -13,8 +13,9 @@ export const userLoginBegin = () => ({
 type: USER_MODULE_USER_LOGIN_BEGIN,
 });
 
-export const userLoginSuccess = (user) => ({
+export const userLoginSuccess = ({ token, user }) => ({
     type: USER_MODULE_USER_LOGIN_SUCCESS,
+    token,
     user,
 });
           
@@ -42,3 +43,4 @@ export function userLogout(){
         return dispatch(userLogoutSuccess());
     }
 }
+

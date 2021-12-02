@@ -111,8 +111,7 @@ const FileDetail = () => {
                         </tr>
                         </tbody>
                     </table>
-
-                    
+        
                         <div className="container-icon-mode">
                             <div className="icon-vista" onClick={ handlePositionList }>
                                 { ( grafica === true ) ? iconGraphPie : iconGrapChar}
@@ -128,12 +127,6 @@ const FileDetail = () => {
                     <p>
 
                     </p>
-
-                 
-
-
-                    
-
                 </div>
             </div>
         </section>

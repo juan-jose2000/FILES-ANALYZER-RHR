@@ -13,6 +13,9 @@ import {
     USERLIST_MODULE_UPDATE_USERLIST_BEGIN,
     USERLIST_MODULE_UPDATE_USERLIST_SUCCESS,
     USERLIST_MODULE_UPDATE_USERLIST_FAILURE,
+    USERLIST_MODULE_DELETE_USERLIST_BEGIN,
+    USERLIST_MODULE_DELETE_USERLIST_SUCCESS,
+    USERLIST_MODULE_DELETE_USERLIST_FAILURE,
 } from "../actionTypes";
 
 
@@ -71,6 +74,19 @@ export const updateUserFailure = () => ({
     type: USERLIST_MODULE_UPDATE_USERLIST_FAILURE,
 });
 
+export const deleteUserBegin = () => ({
+    type: USERLIST_MODULE_DELETE_USERLIST_BEGIN,
+});
+
+export const deleteUserSuccess = (id) => ({
+    type: USERLIST_MODULE_DELETE_USERLIST_SUCCESS,
+    id,
+});
+
+export const deleteUserFailure = () => ({
+    type: USERLIST_MODULE_DELETE_USERLIST_FAILURE,
+});
+
 export function getAllUsers() {
     return(dispatch, getState) => {
         dispatch( getAllUsersBegin() );
@@ -105,7 +121,6 @@ export function getOneUser(id) {
         })    
     }
 }
-
 
 export function createUser(data) {
     data.user_level = parseInt(data.user_level, 10);
@@ -164,6 +179,39 @@ export function updateUser(data) {
           })
         .catch((error) => {
             dispatch( upsertUserFailure(error))
+        })    
+    }
+}
+
+export function deleteUser(id) {
+    console.log(id);
+    return (dispatch, getState) => {
+        dispatch( deleteUserBegin() );
+        return axios({
+            method: 'patch',
+            url: `http://[::1]:3000/users/${id}`,
+            headers: getState().auth.request.headers,
+            data: {
+                _id: id,
+                deleted: true
+            }
+        }) 
+        .then(response => {
+            dispatch( deleteUserSuccess(id));
+            toast.success('Se elimino correctamente', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return true;
+          })
+        .catch((error) => {
+            dispatch(deleteUserFailure(error))
         })    
     }
 }

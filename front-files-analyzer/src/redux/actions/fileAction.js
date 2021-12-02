@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import _ from 'lodash';
+
 import {
     FILE_MODULE_GET_ONE_FILE_BEGIN,
     FILE_MODULE_GET_ONE_FILE_SUCCESS, 
@@ -16,6 +18,9 @@ import {
     FILE_MODULE_UPDATE_FILE_BEGIN,
     FILE_MODULE_UPDATE_FILE_SUCCESS,
     FILE_MODULE_UPDATE_FILE_FAILURE,
+    FILE_MODULE_DELETE_FILE_BEGIN,
+    FILE_MODULE_DELETE_FILE_SUCCESS,
+    FILE_MODULE_DELETE_FILE_FAILURE,
  } from '../actionTypes';
 
 export const getOneFileBegin = () => ({
@@ -86,6 +91,19 @@ export const updateFileFailure = () => ({
     type: FILE_MODULE_UPDATE_FILE_FAILURE,
 });
 
+export const deleteFileBegin = () => ({
+    type: FILE_MODULE_DELETE_FILE_BEGIN,
+});
+
+export const deleteFileSuccess = (id) => ({
+    type: FILE_MODULE_DELETE_FILE_SUCCESS,
+    id,
+});
+
+export const deleteFileFailure = () => ({
+    type: FILE_MODULE_DELETE_FILE_FAILURE,
+});
+
 export const getOneFile = (id) => {
     console.log(id)
     return async (dispatch, getState) => {
@@ -144,9 +162,8 @@ export const getAllFiles = () => {
 }
 
 export const createFile = (data) => {
-    console.log(data);
     return async (dispatch, getState) => {
-        await axios({
+        return axios({
             method: 'post',
             url: `http://[::1]:3000/files`,
             headers: getState().auth.request.headers,
@@ -164,9 +181,42 @@ export const createFile = (data) => {
                 progress: undefined,
                 theme: "light",
             });
+            return true;
           })
         .catch((error) => {
             dispatch( upsertFileFailure(error))
+        })    
+    }
+}
+
+export function deleteFile(id) {
+    return (dispatch, getState) => {
+        dispatch( deleteFileBegin() );
+        return axios({
+            method: 'patch',
+            url: `http://[::1]:3000/files/${id}`,
+            headers: getState().auth.request.headers,
+            data: {
+                _id: id,
+                deleted: true
+            }
+        }) 
+        .then(response => {
+            dispatch( deleteFileSuccess(id));
+            toast.success('Se elimino correctamente', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return true;
+          })
+        .catch((error) => {
+            dispatch(deleteFileFailure(error))
         })    
     }
 }

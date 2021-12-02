@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import imagen from '../../img/create-user.png';
 import { createUser } from "../../redux/actions/userListAction";
@@ -9,6 +9,9 @@ export const CreateUser = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const user = useSelector( state => state.auth.user );
+
     const [ formValues, handleInputChange ] = useForm({
         name: "",
         last_father_name:"",
@@ -27,6 +30,14 @@ export const CreateUser = () => {
         const resultado = await dispatch(createUser(formValues));
         console.log(resultado);
         if(resultado === true) history.push("/user-list");
+    }
+
+    const GetLvels = () => {
+        const levels = [];
+        for( let i=1; i < user.user_level; i++  ) {
+            levels.push(<option value={i}>Nivel {i}</option>);
+        }
+        return levels;
     }
 
     return(
@@ -87,9 +98,7 @@ export const CreateUser = () => {
                         </div>
                         <div className="container-input">
                             <select className="input-form" value={user_level} onChange={handleInputChange} name="user_level" pattern="[1-3]{1}" required >
-                                <option value="1">Nivel 1</option>
-                                <option value="2">Nivel 2</option>
-                                <option value="3">Nivel 3</option>
+                                <GetLvels />
                             </select>
                         </div>
                        

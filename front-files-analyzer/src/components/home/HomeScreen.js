@@ -3,18 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faExchangeAlt, faList, faTh, faFilePdf, faFileWord, faFileAlt, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink, useHistory } from "react-router-dom";
-import { createFile, getAllFiles } from "../../redux/actions/fileAction";
+import { createFile, deleteFile, getAllFiles } from "../../redux/actions/fileAction";
 import _ from 'lodash';
 import moment from 'moment';
+import jwt_decode from "jwt-decode";
 
 export const HomeScreen = () =>{
 
     const dispatch = useDispatch();
     const history = useHistory();
-
-    useEffect(() => {
-        dispatch(getAllFiles());
-    },[]);
+    const user = useSelector( state => state.auth.user );
+    const level = user.user_level;
 
     const [ acomodo, setAcomodo ] = useState({
         list: true,
@@ -28,7 +27,13 @@ export const HomeScreen = () =>{
     const [ find, setFind ] = useState({
         buscando: ""
     }) 
+    
+    const file = useSelector( state => state.file );
+    const filesData = file.files.data;
 
+    useEffect(() => {
+        dispatch(getAllFiles());
+    },[]);
 
     const { list } = acomodo;
     const { nombreArchivo, formData } = archivo; 
@@ -44,7 +49,6 @@ export const HomeScreen = () =>{
         console.log(a.target.value);
     }
 
-
     const handleInputFile = (a) => {
         const formData = new FormData();
         formData.set("files", a.target.files[0]);
@@ -54,10 +58,15 @@ export const HomeScreen = () =>{
         })
     }
 
-    const uploadFile = () => {
-        console.log("se hio click!!");
+    const uploadFile = async () => {
         if(!_.isEmpty(nombreArchivo)) {
-            dispatch(createFile(formData));
+            const resultado = await dispatch(createFile(formData));
+            if(resultado === true) {
+                setArchivo({
+                    nombreArchivo: "",
+                    formData: ""
+                })
+            }
         }
     }
 
@@ -67,12 +76,12 @@ export const HomeScreen = () =>{
         });
     }
 
+    const handleDelete = (id) => {
+        dispatch(deleteFile(id));
+    }
 
     const renderNombreArchivo = <p>{ nombreArchivo }</p>;
-    const file = useSelector( state => state.file );
 
-
-    const filesData = file.files.data;
 
     const finder = filesData.filter((element) => (
         element.name.includes(buscando) ||
@@ -92,7 +101,6 @@ export const HomeScreen = () =>{
             return <h1>Cargando...</h1>
         }
         const dateCreatedAt = moment(element.created_at).local().format('DD-MM-YYYY HH:mm:ss');
-        console.log(dateCreatedAt);
         return (
             <tr>
                 <td></td>
@@ -115,8 +123,8 @@ export const HomeScreen = () =>{
                         <FontAwesomeIcon icon={faEllipsisH} className={"icon-dropdown" } data-bs-toggle="dropdown" aria-expanded="false" />
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li><Link className="dropdown-item" to={`/file/${element._id}`}>Ver</Link></li>
-                            <li><a className="dropdown-item" href="#">Descargar</a></li>
-                            <li><a className="dropdown-item" href="#">Eliminar</a></li>
+                            <li><a className="dropdown-item" href={element.url.split('/')[3]} download={element.name} target="_blank">Descargar</a></li>
+                            <li><a className="dropdown-item" onClick={() => handleDelete(element._id)} >Eliminar</a></li>
                         </ul>
                     </div>
                 </td>
@@ -164,7 +172,6 @@ export const HomeScreen = () =>{
             return <h1>Cargando...</h1>
         }
         const dateCreatedAt = moment(element.created_at).local().format('DD-MM-YYYY HH:mm:ss');
-        console.log(dateCreatedAt);
         return (
             <>
                 <div className="archivo">
@@ -187,13 +194,13 @@ export const HomeScreen = () =>{
                     </div>
                     <div className="subcontainer botones">
                         <div>
-                            <button className="input-form bg-white" onClick={ () => history.push(`/file/${element._id}`) }>ver</button>
+                            <button className="input-form bg-white" onClick={ () => history.push(`/file/${element._id}`) }>Ver</button>
                         </div>
                         <div>
                             <button className="input-form bg-white">Descargar</button> 
                         </div>
                         <div>
-                            <button className="input-form bg-white">Eliminar</button>
+                            <button className="input-form bg-white" onClick={() => handleDelete(element._id)}>Eliminar</button>
                         </div>
                     </div>
                 </div>
@@ -203,7 +210,6 @@ export const HomeScreen = () =>{
 
     const vistaCuadro = (
         <div>
-            <p>Archivos</p>
             <div className="body-square">
                 {iteratorFilesCuadro}
             </div>
@@ -231,15 +237,16 @@ export const HomeScreen = () =>{
                             <button onClick={uploadFile} className="input-form">Subir archivo</button>
                         </div>
                         <div>
-                            <NavLink to="/create-user">
+                            { ( level > 1 ) ? <>
+                                <NavLink to="/create-user">
                                 <i className="icon-plus">
                                     <FontAwesomeIcon icon={faPlus} className="icon"/>
                                 </i>
-                            </NavLink>
-                            <NavLink to="/create-user">
-                                <p className="text-uppercase">agregar usuario</p> 
-                            </NavLink>
-                            
+                                </NavLink>
+                                <NavLink to="/create-user">
+                                    <p className="text-uppercase">agregar usuario</p> 
+                                </NavLink> </> : <></>
+                            }                        
                         </div>
                     </div>
                     

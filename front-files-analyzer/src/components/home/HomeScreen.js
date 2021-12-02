@@ -87,11 +87,12 @@ export const HomeScreen = () => {
     const renderNombreArchivo = <p>{nombreArchivo}</p>;
 
 
-    const finder = filesData.filter((element) => (
+    const finder = filesData.filter((element) => 
         element.name.includes(buscando) ||
-        element.userId.includes(buscando) ||
-        element.size.includes(buscando)
-    ));
+        element.user.username.includes(buscando) ||
+        element.access_level.toString(10).includes(buscando) ||
+        element.created_at.includes(buscando)
+    );
 
     const iconList = <i className="icon-inicio" data-bs-toggle="tooltip" data-bs-placement="left" title="vista lista"><FontAwesomeIcon icon={faList} className="icon icon-list" /></i>;
     const iconListCuadro = <i className="icon-inicio" data-bs-toggle="tooltip" data-bs-placement="left" title="vista cuadro"><FontAwesomeIcon icon={faTh} className="icon" /></i>;

@@ -15,6 +15,8 @@ export const HomeScreen = () =>{
     const user = useSelector( state => state.auth.user );
     const level = user.user_level;
 
+    const [ pagination, setPagination ] = useState(10);
+
     const [ acomodo, setAcomodo ] = useState({
         list: true,
     })
@@ -123,8 +125,8 @@ export const HomeScreen = () =>{
                         <FontAwesomeIcon icon={faEllipsisH} className={"icon-dropdown" } data-bs-toggle="dropdown" aria-expanded="false" />
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li><Link className="dropdown-item" to={`/file/${element._id}`}>Ver</Link></li>
-                            <li><a className="dropdown-item" href={element.url.split('/')[3]} download={element.name} target="_blank">Descargar</a></li>
                             <li><a className="dropdown-item" onClick={() => handleDelete(element._id)} >Eliminar</a></li>
+                            <li><a className="dropdown-item" href={`http://localhost:3000/files/${element._id}/download`} download={element.name} target="_blank">Descargar</a></li>
                         </ul>
                     </div>
                 </td>
@@ -197,7 +199,10 @@ export const HomeScreen = () =>{
                             <button className="input-form bg-white" onClick={ () => history.push(`/file/${element._id}`) }>Ver</button>
                         </div>
                         <div>
-                            <button className="input-form bg-white">Descargar</button> 
+                            {/* <button className="input-form bg-white"> */}
+                                <a className="btn py-2 color-blue input-form bg-white" href={`http://localhost:3000/files/${element._id}/download`} download={element.name} target="_blank">Descargar</a>
+                                {/* Descargar */}
+                            {/* </button>  */}
                         </div>
                         <div>
                             <button className="input-form bg-white" onClick={() => handleDelete(element._id)}>Eliminar</button>
@@ -260,7 +265,7 @@ export const HomeScreen = () =>{
                             }
                     </div>
                     <div className="pagination">
-                        <p>Total de elementos: { file.files.totalRecords }</p>
+                        <p>Total de elementos: { file.files.count }</p>
                         <select 
                             className="input-form"
                             onChange={ handlePagination }

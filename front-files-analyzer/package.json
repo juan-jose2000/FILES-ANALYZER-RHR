@@ -39,7 +39,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "transpile": "node-sass -w ./src/styles/main.scss -o ./src/styles/main.css"
   },
   "eslintConfig": {
     "extends": [

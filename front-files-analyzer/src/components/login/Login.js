@@ -8,8 +8,9 @@ import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 // import { userLogin } from '../../redux/actions/userAction';
-import { userLoginBegin, userLoginSuccess } from '../../redux/actions/userAction';
+import { userLoginBegin, userLoginSuccess, userLoginFailure } from '../../redux/actions/userAction';
 import jwt_decode from 'jwt-decode';
+import { toast } from 'react-toastify';
 
 export const Login = (props) => {
 
@@ -49,34 +50,36 @@ export const Login = (props) => {
         }
 
 
-        try {
-
             dispatch(userLoginBegin());
-
-            const {data} = await axios({
+            axios({
                 method: 'post',
                 url: 'http://[::1]:3000/users/login',
                 data: {
                     email: username,
                     password,
                 }
-            })  
-            
-            console.log(data.token);
-            const decoded = jwt_decode(data.token);
-            console.log(decoded);
-
-            dispatch(userLoginSuccess({token: data.token, user: decoded}))
-
-
-
-            props.history.push(`/home`);
-
-        } catch(error) {
-            return error;
-        }
-    
-        // console.log(props);
+            }) 
+            .then(response => {
+                console.log(response);
+                const decoded = jwt_decode(response.data.token);
+                console.log(decoded);
+                dispatch(userLoginSuccess({token: response.data.token, user: decoded}))
+                props.history.push(`/home`);
+            })
+            .catch((error) => {
+                dispatch(userLoginFailure(error.message))
+                console.log(error);
+                toast.error('Hubo un error, datos incorrectos', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            })    
     }
 
     return (
@@ -93,13 +96,13 @@ export const Login = (props) => {
                     }
 
                     <form onSubmit={ handleSubmit } className="login-form">
-                        <input type="text" className="input-form" name="username" value={ username } onChange={handleInputChange} placeholder="Usuario"/>
-                        <input type="password" className="input-form" name="password" value={ password }  onChange={handleInputChange} placeholder="Contraseña"/>
+                        <input type="text" className="input-form" name="username" value={ username } onChange={handleInputChange} placeholder="Usuario" required/>
+                        <input type="password" className="input-form" name="password" value={ password }  onChange={handleInputChange} placeholder="Contraseña" required/>
 
                         <button type="submit" className="button mt-3">Ingresar</button>
                     </form>
 
-                    <NavLink className="btn btn-link mt-3" to="/recover-password" >Olvide mi contraseña</NavLink>
+                    {/* <NavLink className="btn btn-link mt-3" to="/recover-password" >Olvide mi contraseña</NavLink> */}
                     {/* <button type="button" className="btn btn-link mt-3">Olvide mi contraseña</button> */}
 
                 </div>
